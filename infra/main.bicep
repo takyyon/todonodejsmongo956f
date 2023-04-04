@@ -37,7 +37,7 @@ var resourceToken = toLower(uniqueString(subscription().id, environmentName, loc
 var tags = { 'azd-env-name': environmentName }
 var resourcegroupTags = empty(resourceGroupTags ? base64ToJson(resourceGroupTags) : {}
 
-output resourcegroupTags string = resourcegroupTags
+output resourcegroupTags object = resourcegroupTags
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
