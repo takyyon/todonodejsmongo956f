@@ -35,7 +35,7 @@ param principalId string = ''
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var tags = { 'azd-env-name': environmentName }
-var resourcegroupTags = empty(resourceGroupTags ? base64ToJson(resourceGroupTags) : {}
+var resourcegroupTags = empty(resourceGroupTags) ? base64ToJson(resourceGroupTags) : {}
 
 output resourcegroupTags object = resourcegroupTags
 
