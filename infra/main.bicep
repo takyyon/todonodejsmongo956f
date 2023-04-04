@@ -35,12 +35,15 @@ param principalId string = ''
 var abbrs = loadJsonContent('./abbreviations.json')
 var resourceToken = toLower(uniqueString(subscription().id, environmentName, location))
 var tags = { 'azd-env-name': environmentName }
+var resourcegroupTags = empty(resourceGroupTags ? base64ToJson(resourceGroupTags) : {}
+
+output resourcegroupTags
 
 // Organize resources in a resource group
 resource rg 'Microsoft.Resources/resourceGroups@2021-04-01' = {
   name: !empty(resourceGroupName) ? resourceGroupName : '${abbrs.resourcesResourceGroups}${environmentName}'
   location: location
-  tags: empty(resourceGroupTags) ? tags : union(base64ToJson(resourceGroupTags), tags)
+  tags: union(resourcegroupTags, tags)
 }
 
 // The application frontend
